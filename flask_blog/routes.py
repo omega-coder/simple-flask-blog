@@ -1,12 +1,7 @@
-from flask import Flask, render_template, url_for, redirect, session, flash, request
-from forms import RegistrationForm, LoginForm
-
-app = Flask(__name__)
-
-# Random Secret
-
-app.config['SECRET_KEY'] = '2d1d36485bb9ce3d1982d45094d9fe04'
-
+from flask import render_template, url_for, redirect, flash
+from flask_blog.forms import RegistrationForm, LoginForm
+from flask_blog import app
+from flask_blog.models import User, Post
 
 posts = [
     {
@@ -22,7 +17,6 @@ posts = [
         'date_posted': '16 Jul, 2018'
     }
 ]
-
 
 @app.route("/")
 @app.route("/home")
@@ -48,8 +42,9 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        flash('Logged in successfully', 'success')
+        return redirect(url_for('home'))
     return render_template('login.html', title='Login Portal', form=form)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)

@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="content-section">
+        <form action="" method="POST">
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Log In</legend>
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.email.label(class_="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class_="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class_="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class_="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class_="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class_="form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {{ form.remember_field(class_="form-check-input") }}
+                    {{ form.remember_field.label(class_="form-check-label") }}
+                </div>
+                <hr>
+                <div class="form-group">
+                    {{ form.submit(class_="btn btn-outline-primary") }}
+                    <small class="text-muted ml-2">
+                        <a href="#">Forgot password?</a>
+                    </small>
+                </div>
+
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Need an account ? <a href="{{ url_for('register') }} " class="ml-2">Sign Up</a>
+                    </small>
+                </div>
+            </fieldset>
+
+
+        </form>
+    </div>
+{% endblock %}
