@@ -13,5 +13,4 @@ login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
 
-
 from flask_blog import routes
